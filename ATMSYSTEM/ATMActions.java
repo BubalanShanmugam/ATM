@@ -22,11 +22,21 @@ public class ATMActions {//Actions of ATM
 
             if (choice == 1)
             {
-                //calls the adminlogin ,from the adminActions.store sthe return value of adminl;ogin method
-                Admin a = (Admin) AdminActions.adminLogin(sc);
-                if (a !=null) {
-                    adminMenu(sc, adminActions,a);
+                //getting username
+                System.out.print("Enter Admin Username: ");
+                String adminUsername = sc.nextLine();
+                //calls the adminlogin ,from the adminActions.store the return value of adminlogin method
+                Admin a = (Admin) AdminActions.adminLogin(sc,adminUsername);
+                if (a ==null) { //if cond to check whether the admin object 'a' is null or not
+                    System.out.println("Invalid admin");
+                } else if(a.getName()==null) //it checks whether the 'a' obj containing admin username is == admin users list
+                {
+                    System.out.println("Invalid credentials...");
                 }
+                else {
+                    adminMenu(sc, adminActions,a);// it calls the adminactions method, if admin username and password get matched
+                }
+
 
             } else if (choice == 2)
             {   //calls the userlogin ,from the UserActions....stores the return value of userlogin method

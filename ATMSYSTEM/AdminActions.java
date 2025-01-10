@@ -6,13 +6,9 @@ import ATM.bubalanatms.ATMSYSTEM.Notes.Note;
 
     public class AdminActions { //admin actions class
 
-        public static Account adminLogin(Scanner sc) {// admin login method
+        public static Account adminLogin(Scanner sc,String adminUsername) {// admin login method
             int attempts = 0;//for condition purpose
             while (attempts < 3) {//repeats untill 3 attempts
-                //getting user name
-                System.out.print("Enter Admin Username: ");
-                String adminUsername = sc.nextLine();
-
                 boolean usernameExists = false;//condition purpose
                 for (Account admin : ATM.getListofuser()) {//takes the user and admin object element from the userlist.
                     if (admin instanceof Admin) {//checks....admin is the Admin / User object type.
@@ -23,8 +19,7 @@ import ATM.bubalanatms.ATMSYSTEM.Notes.Note;
                     }
                 }
                 if (!usernameExists) {//if user is not avilable.
-                    System.out.println("Invalid Admimnname, Admin not found");
-                    return null;//returns admin as null .(if admin is not valid.
+                    return null;//returns admin as null . (if admin is not valid.
                 }
                 //password
                 System.out.print("Enter Admin Password: ");
@@ -69,9 +64,11 @@ import ATM.bubalanatms.ATMSYSTEM.Notes.Note;
         public void deleteUserAccount(String usernameToDelete) {
             User userToDelete = null;
             for (Account user : ATM.getListofuser()) {//takes the user and admin object element from the userlist.
-                if (user.getName().equals(usernameToDelete)) {//enters into the body ,if the usernme is equal to the given username.
-                    userToDelete = (User) user;//for the condition purpose boolean var.
-                    break;//if any user has the given name ...then breaks.
+                if (user instanceof User) {//checks....admin is the User object type.
+                    if (user.getName().equals(usernameToDelete)) {//enters into the body ,if the usernme is equal to the given username.
+                        userToDelete = (User) user;//for the condition purpose boolean var.
+                        break;//if any user has the given name ...then breaks.
+                    }
                 }
             }
             if (userToDelete != null) {//if user is available
