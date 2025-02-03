@@ -3,7 +3,6 @@
 This Java console application simulates an ATM system, allowing users to perform various banking transactions such as checking balance, depositing money, withdrawing money, and transferring money between accounts.  It emphasizes secure handling of user data and transactions.
 
 ---
-<img width="395" alt="Screenshot 2025-02-03 224816" src="https://github.com/user-attachments/assets/f73a4377-102d-4ba6-acff-98e5d4db7274" />
 
 
 ## Features
