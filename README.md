@@ -59,16 +59,19 @@ https://github.com/user-attachments/assets/10850b08-20cc-405c-bf81-24c3b63be3a0
 
 Clone the GitHub repository to your local machine using the following command:
 
-bash
+```bash
 git clone https://github.com/BubalanShanmugam/ATM.git
+```
 
 *step 2: Compile the application:*
-bash
+```bash
 javac ATM.java
+```
 
 *step 3:  Run the application:*
-bash   
+```bash   
 java ATM
+```
 
 
 ## Usage Instructions
@@ -100,7 +103,6 @@ java ATM
 
 ## Security Considerations
 
-* *PIN Storage:* While this example may not demonstrate advanced security measures like hashing and salting for PIN storage (which is crucial in real-world applications), consider implementing these in a production environment.  Do not store PINs in plain text.
 * *Input Validation:* The application should thoroughly validate user input to prevent errors and potential security vulnerabilities.
 
 ## Contact
