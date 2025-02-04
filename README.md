@@ -1,13 +1,13 @@
 # ATM Management System - Java Console Application
 
-This Java console application simulates an ATM system, allowing users to perform various banking transactions such as checking balance, depositing money, withdrawing money, and transferring money between accounts.  It emphasizes secure handling of user data and transactions.
+This Java console application simulates an ATM system, allowing users to perform various banking transactions such as checking balance, depositing money, withdrawing money, and view transaction.  It emphasizes secure handling of user data and transactions.
 
 ---
-**Class Diagram**
+## **Class Diagram**
 
 <img width="395" alt="Screenshot 2025-02-03 224816" src="https://github.com/user-attachments/assets/07941c8e-f98d-4fd0-b3cf-4da1f1c5455d" />
 
-**Execution Video**
+## **Execution Video**
 
 https://github.com/user-attachments/assets/10850b08-20cc-405c-bf81-24c3b63be3a0
 
@@ -21,24 +21,21 @@ https://github.com/user-attachments/assets/10850b08-20cc-405c-bf81-24c3b63be3a0
     - Allows users to view their current account balance.
 
 3. *Deposit Money:*
-    - Enables users to deposit funds into their account.
+    - Enables users to deposit amount into their account.
 
 4. *Withdraw Money:*
-    - Allows users to withdraw funds from their account, with checks for sufficient balance.
+    - Allows users to withdraw amount from their account, with checks for sufficient balance.
 
-5. *Transfer Money:*
-    - Facilitates transferring funds between two accounts within the system.
-
-6. *Transaction History:*
+5. *Transaction History:*
     - Maintains a record of all transactions performed by the user.
 
-7. *Data Persistence:*
+6. *Data Persistence:*
     - User account data and transaction history are stored persistently, ensuring data is retained across sessions.
 
-8. *Error Handling:*
+7. *Error Handling:*
     - Implements robust error handling to manage invalid inputs, insufficient funds, and other potential issues.
 
-9. *User-Friendly Interface:*
+8. *User-Friendly Interface:*
     - Provides a clear and easy-to-navigate command-line interface.
 
 ---
@@ -52,13 +49,7 @@ https://github.com/user-attachments/assets/10850b08-20cc-405c-bf81-24c3b63be3a0
     - Encapsulation, Inheritance, and Polymorphism are used to structure the application effectively.
 
 3. *Data Structures:*
-    - Appropriate data structures (e.g., ArrayList, HashMap) are used to manage user accounts and transactions.
-
-4. *File I/O:*
-    - Used for persistent storage of user data and transaction history.
-
-5. *Exception Handling:*
-    - Mechanisms for handling exceptions and errors gracefully.
+    - Appropriate data structures (e.g., ArrayList) are used to manage user accounts and transactions.
 
 ---
 
@@ -90,7 +81,7 @@ java ATM
      - Check Balance
      - Deposit
      - Withdraw
-     - Transaction History
+     - Transaction History(user / admin)
      - Exit
     
    - After successful user login, you will be presented with a menu of options:
@@ -101,13 +92,10 @@ java ATM
      - Change PIN
      - Exit
 
-3. *Select an Option:*
-   - Enter the corresponding number for the desired transaction.
-
-4. *Follow Prompts:*
+3. *Follow Prompts:*
    - The application will guide you through the necessary steps for each transaction.
 
-5. *Exit:*
+4. *Exit:*
    - Choose the "Exit" option to terminate the program.
 
 ## Security Considerations
