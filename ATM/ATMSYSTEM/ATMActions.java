@@ -1,17 +1,29 @@
 package ATM.ATMSYSTEM;
 
+import ATM.ATMSYSTEM.ListofNotes.Five;
+import ATM.ATMSYSTEM.ListofNotes.One;
+import ATM.ATMSYSTEM.ListofNotes.Two;
+import ATM.ATMSYSTEM.ListofNotes.Twoo;
+import ATM.ATMSYSTEM.Notes.Note;
+import ATM.ATMSYSTEM.Notes.Notess;
 import java.util.Scanner;
-import java.lang.String;
 
 public class ATMActions {//Actions of ATM
+
 
     public static void start() throws CloneNotSupportedException {//start method definition
         Scanner sc = new Scanner(System.in);//Scanner object
         AdminActions adminActions = new AdminActions();//creating the instance for the AdminActions
+        UserActions userActions = new UserActions();
+        Notess<Note> newnote = new Notess<>();
+        newnote.set(new Twoo(2000,0));
+        newnote.set(new Five(500,0));
+        newnote.set(new Two(200,0));
+        newnote.set(new One(100,0));
+
 
         //assigning the default admin name and passwords
         ATM.getListofuser().add(new Admin(1234, 1234));
-//        ATM.getListofuser().add(new Account("admin2", 5678));
 
         while (true) {
             //ATM menu
@@ -22,11 +34,8 @@ public class ATMActions {//Actions of ATM
 
             if (choice == 1)
             {
-                //getting username
-                System.out.print("Enter Admin login id: ");
-                int adminUsername = Integer.parseInt(sc.nextLine());
                 //calls the adminlogin ,from the adminActions.store the return value of adminlogin method
-                Admin a = (Admin) AdminActions.adminLogin(sc,adminUsername);
+                Admin a = (Admin) adminActions.Login(sc);
                 if (a ==null) { //if cond to check whether the admin object 'a' is null or not
                     System.out.println("Invalid admin");
                 } else if(a.getAcnum()==0) //it checks whether the 'a' obj containing admin username is == admin users list
@@ -34,28 +43,30 @@ public class ATMActions {//Actions of ATM
                     System.out.println("Invalid credentials...");
                 }
                 else {
-                    adminMenu(sc, adminActions,a);// it calls the adminactions method, if admin username and password get matched
+                    adminMenu(sc, adminActions,a,newnote);// it calls the adminactions method, if admin username and password get matched
                 }
-
-
-            } else if (choice == 2)
+            }
+            else if (choice == 2)
             {   //calls the userlogin ,from the UserActions....stores the return value of userlogin method
-               User user = (User)UserActions.userLogin(sc);
+               User user = (User)userActions.Login(sc);
                 if (user != null) {//if only admin is correctly logined.
-                    userMenu(sc,user);//calls the usermenu method with the user object.
+                    userMenu(sc,user,newnote);//calls the usermenu method with the user object.
                 }
-            } else if (choice == 3)//if we want to logout the atm .
+            }
+            else if (choice == 3)//if we want to logout the atm .
             {
                 System.out.println("Exiting the ATM system...");
                 break;
-            } else//choice is not valid.
+            }
+            else//choice is not valid.
             {
                 System.out.println("Invalid choice. Please try again.");
             }
         }
     }
 
-    public static void adminMenu(Scanner sc, AdminActions adminActions,Admin admin) {//adminmenu method definitions
+
+    public static void adminMenu(Scanner sc, AdminActions adminActions,Admin admin, Notess newnote) {//adminmenu method definitions
         boolean exitAdmin = false;//for the condition purpose.
         while (!exitAdmin) {
             //Admin menu list
@@ -82,7 +93,7 @@ public class ATMActions {//Actions of ATM
                     // case for calling the method to admin deposit
                     System.out.println("Enter the total amount to deposit:");
                     int deposit = Integer.parseInt(sc.nextLine());
-                    adminActions.adminDeposit(deposit,sc,admin);
+                    adminActions.deposit(deposit,sc,admin,newnote);
                     break;
                 case 5:
                     // case for calling the method to view balance of atm
@@ -93,7 +104,6 @@ public class ATMActions {//Actions of ATM
                     System.out.print("Transaction History :");
                     adminActions.viewtrahis(sc,admin);
                     break;
-
                 case 7:
                     // case for exiting the adminmenu
                     exitAdmin = true;
@@ -105,7 +115,7 @@ public class ATMActions {//Actions of ATM
         }
     }
 
-    public static void userMenu(Scanner sc,User user) throws CloneNotSupportedException {//usermenu method definitions
+    public static void userMenu(Scanner sc,User user,Notess newnote) throws CloneNotSupportedException {//usermenu method definitions
         UserActions userActions= new UserActions();//object creation for the useractions class.
         boolean exitUserMenu = false;//for the condition purpose.
         while (!exitUserMenu) {
@@ -126,13 +136,13 @@ public class ATMActions {//Actions of ATM
                     // case for calling the user deposit
                     System.out.print("Enter deposit amount: ");
                     double depositAmount = Double.parseDouble(sc.nextLine());
-                    userActions.deposit(depositAmount,sc,user);
+                    userActions.deposit(depositAmount,sc,user,newnote);
                     break;
                 case 2:
                     //case for calling the user withdraw
                     System.out.print("Enter withdrawal amount: ");
                     double withdrawAmount = Double.parseDouble(sc.nextLine());
-                    userActions.withdraw(withdrawAmount,user);
+                    userActions.withdraw(withdrawAmount,user,newnote);
                     break;
                 case 3:
                     //case to check the user balance

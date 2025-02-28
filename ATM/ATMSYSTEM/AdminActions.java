@@ -3,10 +3,14 @@ package ATM.ATMSYSTEM;
 import java.util.ArrayList;
 import java.util.Scanner;
 import ATM.ATMSYSTEM.Notes.Note;
+import ATM.ATMSYSTEM.Notes.Notess;
 
-    public class AdminActions { //admin actions class
-
-        public static Account adminLogin(Scanner sc,int adminUsername) {// admin login method
+public class AdminActions implements AdminActionsInterface{ //admin actions class
+        @Override
+        public Account Login(Scanner sc) {// admin login method
+            //getting username
+            System.out.print("Enter Admin login id: ");
+            int adminUsername = Integer.parseInt(sc.nextLine());
             int attempts = 0;//for condition purpose
             while (attempts < 3) {//repeats untill 3 attempts
                 boolean usernameExists = false;//condition purpose
@@ -39,7 +43,6 @@ import ATM.ATMSYSTEM.Notes.Note;
             System.out.println("attempt finished");
             return null;//if not admin found.
         }
-
 
         public void addUserAccount(Scanner sc) {//method to add user.
             //gets the username for the user
@@ -108,63 +111,60 @@ import ATM.ATMSYSTEM.Notes.Note;
         }
 
         public void viewTransactions(Scanner sc) {//to view the user transactions
+            User user = null;
             //getting the name of the user need to print.
             System.out.print("Enter the account number of the user: ");
             int username = Integer.parseInt(sc.nextLine());
             for (Account account : ATM.getListofuser()) {//takes the user and admin object element from the userlist.
-                User user = null;
                 if (account instanceof User) {//checks....admin is the User object type.
-                    if (account.getAcnum()==(username)) {//enters into the body ,if the usernme is equal to the given username.
+                    if (account.getAcnum() == (username)) {//enters into the body ,if the usernme is equal to the given username.
                         user = (User) account;//if username is equal...stores it
-
-                        if (user == null) {//if user is not available
-                            System.out.println("User not found!");
-                        } else {//user is available
-                            ArrayList<Transfer> userTransactions = user.getTransactions();//storing the particular user's transactions to another arraylist
-                            if (userTransactions.isEmpty()) {//if no transactions available.
-                                System.out.println("No transactions found for user: " + username);
-                            } else {//if transactions are found.
-                                System.out.println("Transaction History for user: " + username);
-                                for (Transfer transfer : userTransactions) {//iterates the user 's gransactions and prints them.
-                                    System.out.println(transfer);//printing the transaction.
-                                }
+                        ArrayList<Transfer> userTransactions = user.getTransactions();//storing the particular user's transactions to another arraylist
+                        if (userTransactions.isEmpty()) {//if no transactions available.
+                            System.out.println("No transactions found for user: " + username);
+                        } else {//if transactions are found.
+                            System.out.println("Transaction History for user: " + username);
+                            for (Transfer transfer : userTransactions) {//iterates the user 's gransactions and prints them.
+                                System.out.println(transfer);//printing the transaction.
                             }
                         }
+                    }else {//if user is not available
+                        System.out.println("User not found!");
                     }
                 }
             }
         }
 
 
-            public double adminDeposit ( int deposit, Scanner sc, Admin admin) {//admin deposit method
+       public void deposit(double deposit, Scanner sc, Admin admin, Notess newnote) {//admin deposit method
                 //getting the denomination's count
                 System.out.print("2000=");
-                int tk = Integer.parseInt(sc.nextLine());
+                int twothousand = Integer.parseInt(sc.nextLine());
                 System.out.print("500=");
-                int f = Integer.parseInt(sc.nextLine());
+                int fivehundred = Integer.parseInt(sc.nextLine());
                 System.out.print("200=");
-                int t = Integer.parseInt(sc.nextLine());
+                int twohundred = Integer.parseInt(sc.nextLine());
                 System.out.print("100=");
-                int o = Integer.parseInt(sc.nextLine());
+                int onehundred = Integer.parseInt(sc.nextLine());
 
-                int t2000 = 2000 * tk;
-                int f500 = 500 * f;
-                int t200 = 200 * t;
-                int o100 = 100 * o;
+                int t2000 = 2000 * twothousand;
+                int f500 = 500 * fivehundred;
+                int t200 = 200 * twohundred;
+                int o100 = 100 * onehundred;
                 //by multipling the count and respective denominations ....get the total value.
                 int total = t2000 + f500 + t200 + o100;
                 if (deposit == total) {//if total is equal to the deposit value....getting in..
-                    for (Note note : ATM.getNotesArrayList()) {//from the notesarraylist......gets all the  Notes objects
+                    for (Note note : newnote.getNotearray()) {//from the notesarraylist......gets all the  Notes objects
                         int notetype = note.getDenomination();//using the Note object stores the denomination...2000/500/200/100
                         switch (notetype) {//swith case for the setting notes count.
                             case 2000://if the note type is 2000
-                                note.setNote(note.getNote() + tk);
+                                note.setNote(note.getNote() + twothousand);
                             case 500://if the note type is 500
-                                note.setNote(note.getNote() + f);
+                                note.setNote(note.getNote() + fivehundred);
                             case 200://if the note type is 200
-                                note.setNote(note.getNote() + t);
+                                note.setNote(note.getNote() + twohundred);
                             case 100://if the note type is 100
-                                note.setNote(note.getNote() + o);
+                                note.setNote(note.getNote() + onehundred);
                         }
                     }
 
@@ -172,11 +172,9 @@ import ATM.ATMSYSTEM.Notes.Note;
 
                     admin.getTransactions().add(new Transfer(admin.getAcnum(), "Deposit", deposit));//adding the transaction of the deosited process,to the admin transactions
                     System.out.println("Deposit successful. New balance: " + ATM.getBalance());
-                }else{//if denomination is mismatching...
+                }else {//if denomination is mismatching...
                     System.out.println("Denominations doesn't matching...!\n Please enter the real value");
-                    return adminDeposit(deposit,sc,admin);
                 }
-                return 0;
             }
 
             public void viewtrahis (Scanner sc, Admin admin)//method for view transaction

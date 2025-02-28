@@ -2,19 +2,20 @@ package ATM.ATMSYSTEM;
 
 import java.util.ArrayList;
 
-public class Account {//Account pojo class
+public abstract class Account {//Account pojo class
 
     private  int acnum;//Name for the both user and admin
     private  int pin;//pin for the both user and admin
     private ArrayList<Transfer> transactions = new ArrayList<>();//transactions arraylist for the both user and admin
 
-//gettor for the transactions
+    //gettor for the transactions
     public ArrayList<Transfer> getTransactions() {
         return transactions;
     }
 
 //Account class's constructor.
     protected Account(int accnum, int password) {
+        //super();[implicitly calling the constructor of object class]
         this.acnum = accnum;
         this.pin = password;
     }

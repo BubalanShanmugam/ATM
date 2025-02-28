@@ -6,6 +6,7 @@ public class Transfer {
     private double amount;
 
     public Transfer(int username, String type, double amount) {
+        //super();[implicitly calling the constructor of object class]
         this.username = username;
         this.type = type;
         this.amount = amount;
