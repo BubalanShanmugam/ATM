@@ -7,9 +7,9 @@ This Java console application simulates an ATM system, allowing users to perform
 
 <img width="395" alt="Screenshot 2025-02-03 224816" src="https://github.com/user-attachments/assets/07941c8e-f98d-4fd0-b3cf-4da1f1c5455d" />
 
-## **Execution Video**
+## ** Execution Video**
 
-https://github.com/user-attachments/assets/10850b08-20cc-405c-bf81-24c3b63be3a0
+https://github.com/user-attachments/assets/39c1c211-623c-47a0-b28b-7017d6184395
 
 
 ## Features
